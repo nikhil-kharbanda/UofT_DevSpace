@@ -1,26 +1,22 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const { chats } = require("./data/data");
-
+const { ApolloServer } = require('apollo-server-express');
+const express = require('express');
 const app = express();
-dotenv.config();
+const db = require('./config/connection');
+const { typeDefs, resolvers } = require('./schemas')
+const PORT = process.env.PORT || 3001;
 
-app.get("/", (req, res) => {
-  res.send("API is running");
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: (ctx) => ctx
 });
 
-// Get all chats
-app.get("/api/chat", (req, res) => {
-  res.send(chats);
-});
+server.applyMiddleware({ app });
 
-// Get chat by id
-app.get("/api/chat/:id", (req, res) => {
-  // console.log(req.params.id)
-  const singleChat = chats.find((c) => c._id === req.params.id);
-  res.send(singleChat);
-});
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(8000, console.log(`Server is running on PORT ${PORT}`));
+db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    });
+  });
+  
