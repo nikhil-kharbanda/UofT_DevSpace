@@ -6,7 +6,6 @@
   "scripts": {
     "start": "npm run backend/server.js",
     "install": "cd backend && npm i && cd ../frontend && npm i",
-   
     "develop": "concurrently \"cd backend && npm run watch\" \"cd frontend && npm start\""
   },
   "author": "",
