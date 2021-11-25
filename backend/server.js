@@ -11,7 +11,10 @@ const server = new ApolloServer({
   context: (ctx) => ctx
 });
 
+const PORT = process.env.PORT || 8000;
+
 server.applyMiddleware({ app });
+
 
 db.once('open', () => {
     app.listen(PORT, () => {
