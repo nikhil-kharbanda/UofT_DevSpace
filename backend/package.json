@@ -6,11 +6,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+
     "watch": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.15"
+
+    "dev": "nodemon server.js --ignore client/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.25.3",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "graphql": "^14.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13"
   }
 }
