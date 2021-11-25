@@ -8,6 +8,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
+//test
+
 const Signup = (props) => {
   const [show, setShow] = useState(false);
   const [pic, setPic] = useState();
