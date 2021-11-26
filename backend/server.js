@@ -2,12 +2,11 @@ const { ApolloServer } = require('apollo-server-express');
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas')
 
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import mongoData from './models/mongoData'
+const express = require('express')
 
-import Pusher from 'pusher'
+const cors = require('cors')
+const mongoData = require('./models/mongoData')
+const Pusher = require('pusher')
 
 const pusher = new Pusher({
   appId: "1306369",
@@ -31,38 +30,8 @@ const server = new ApolloServer({
 app.use(express.json());
 app.use(cors())
 
-
 server.applyMiddleware({ app });
 
-//db config
-const mongoURI = 'mongodb+srv://nikhilkharbanda-admin:1593578462nk@cluster0.zvogn.mongodb.net/discorddb?retryWrites=true&w=majority';
-
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-
-mongoose.connection.once('open', () =>{
-    console.log("Pusher: DB Connected")
-
-    const changeStream = mongoose.connection.collection('messages').watch();
-
-    changeStream.on('change', (change) => {
-        if(change.operationType === 'insert') {
-            pusher.trigger('channels', 'newChannel', {
-                'change': change
-            })
-        } else if (change.operationType === 'update') {
-            pusher.trigger('conversation', 'newMessage', {
-                'change': change
-            })
-        } else {
-            console.log('Error triggering Pusher')
-        }
-    })
-})
 
 //api routes
 app.get('/', (req, res) => res.status(200).send('hello'))
@@ -140,7 +109,26 @@ app.get('/get/conversation', (req, res) => {
 });
 
 db.once('open', () => {
-    app.listen(PORT, () => {
+
+    console.log("Pusher: DB Connected")
+
+    const changeStream = db.collection('messages').watch();
+
+    changeStream.on('change', (change) => {
+        if(change.operationType === 'insert') {
+            pusher.trigger('channels', 'newChannel', {
+                'change': change
+            })
+        } else if (change.operationType === 'update') {
+            pusher.trigger('conversation', 'newMessage', {
+                'change': change
+            })
+        } else {
+            console.log('Error triggering Pusher')
+        }
+    })
+
+    app.listen(port, () => {
       console.log(`API server running on port ${port}!`);
       console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
     });
