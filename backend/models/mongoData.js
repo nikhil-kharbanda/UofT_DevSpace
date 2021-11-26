@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const chatroomSchema = mongoose.Schema({
     channelName: String,
@@ -16,4 +17,9 @@ const chatroomSchema = mongoose.Schema({
     ]
 })
 
-export default mongoose.model('messages', chatroomSchema)
+// export default mongoose.model('messages', chatroomSchema)
+
+const chatRoom = mongoose.model("message", chatroomSchema);
+
+module.exports = chatRoom;
+
