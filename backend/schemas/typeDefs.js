@@ -7,10 +7,14 @@ const typeDefs = gql`
     password: String
     }
 
-    type chatRoom {
+    type Conversation {
       message: String
       timestamp: String
-      user: User
+      user: [User]
+    }
+    type ChatRoom {
+      channelName: String
+      conversation: Conversation
     }
 
     type Chat {
