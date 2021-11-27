@@ -7,6 +7,24 @@ const typeDefs = gql`
     password: String
     }
 
+    type chatRoom {
+      message: String
+      timestamp: String
+      user: User
+    }
+
+    type Chat {
+      chatName: String
+      latestMessage: Message
+      groupAdmin: User
+    }
+
+    type Message {
+      sender: User!
+      content: String
+      chat: Chat
+    }
+
     type Auth {
     token: ID!
     user: User
