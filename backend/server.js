@@ -7,6 +7,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoData = require('./models/mongoData')
 const Pusher = require('pusher')
+// const {graphqlHTTP} = require('express-graphql');
 
 const pusher = new Pusher({
   appId: "1306369",
@@ -107,6 +108,12 @@ app.get('/get/conversation', (req, res) => {
         }
     })
 });
+
+// app.use('graphql', graphqlHTTP({
+//     graphiql: true,
+//     schema: RootSchema,
+
+// }))
 
 db.once('open', () => {
 
