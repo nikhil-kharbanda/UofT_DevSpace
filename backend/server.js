@@ -119,11 +119,11 @@ app.get('/get/conversation', (req, res) => {
     })
 });
 
-app.use('graphql', graphqlHTTP({
-    graphiql: true,
-    schema: RootSchema,
+// app.use('graphql', graphqlHTTP({
+//     graphiql: true,
+//     schema: RootSchema,
 
-}))
+// }))
 
 db.once('open', () => {
 
