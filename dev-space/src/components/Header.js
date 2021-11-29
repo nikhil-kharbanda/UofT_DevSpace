@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Link } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, IconButton, Toolbar, Button, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
@@ -59,7 +59,7 @@ export default function Header() {
       <Collapse in={checked} {...(checked ? {timeout: 1000} : {})}>
       <div className={classes.main}>
         <h1 className={classes.title}>Welcome to <br /><span className={classes.red}>Dev Space</span>.</h1>
-        <Button className={classes.btn}>Enter</Button>
+        <Button className={classes.btn}><Link to='/login'>Enter</Link></Button>
       </div>
       </Collapse>
     </div>
