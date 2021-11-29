@@ -31,9 +31,8 @@
   ## Questions
   Please reach out through this url: https://github.com/nikhil-kharbanda/UofT_Chatbox/issues
   
-  Send me an email at 
+  ## Links
+  
+  ##Images
+  ![image](https://user-images.githubusercontent.com/87992263/143961073-00869fa5-d2dd-4031-b78b-64c6519d8d4f.png)
 
-  ## GitHub
-  https://github.com/
-
-  undefined
