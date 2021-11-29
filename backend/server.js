@@ -36,13 +36,13 @@ app.use(express.static("frontend/build"))
 server.applyMiddleware({ app });
 
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/build')));
-  }
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../frontend/build')));
+//   }
   
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-  });
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+//   });
   
 //api routes
 app.get('/', (req, res) => res.status(200).send('hello'))
