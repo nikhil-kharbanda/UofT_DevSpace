@@ -1,6 +1,7 @@
 const { ApolloServer } = require('apollo-server-express');
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas')
+const path = require("path")
 
 const express = require('express')
 
@@ -30,84 +31,93 @@ const server = new ApolloServer({
 //middleware
 app.use(express.json());
 app.use(cors())
+app.use(express.static("client/build"))
 
 server.applyMiddleware({ app });
 
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+  
 //api routes
-app.get('/', (req, res) => res.status(200).send('hello'))
+// app.get('/', (req, res) => res.status(200).send('hello'))
 
-app.post('/new/channel', (req, res) => {
-    const dbData = req.body;
+// app.post('/new/channel', (req, res) => {
+//     const dbData = req.body;
 
-    console.log(dbData);
+//     console.log(dbData);
 
-    mongoData.create(dbData, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(201).send(data)
-        }
-    })
-});
+//     mongoData.create(dbData, (err, data) => {
+//         if (err) {
+//             res.status(500).send(err)
+//         } else {
+//             res.status(201).send(data)
+//         }
+//     })
+// });
 
-app.get('/get/channelList', (req, res) => {
-    mongoData.find((err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            let channels = [];
-            data.map((channelData) => {
-                const channelInfo = {
-                    id: channelData._id,
-                    name: channelData.channelName
-                }
-                channels.push(channelInfo)
-            })
-            res.status(200).send(channels)
-        }
-    })
-})
+// app.get('/get/channelList', (req, res) => {
+//     mongoData.find((err, data) => {
+//         if (err) {
+//             res.status(500).send(err)
+//         } else {
+//             let channels = [];
+//             data.map((channelData) => {
+//                 const channelInfo = {
+//                     id: channelData._id,
+//                     name: channelData.channelName
+//                 }
+//                 channels.push(channelInfo)
+//             })
+//             res.status(200).send(channels)
+//         }
+//     })
+// })
 
-app.post('/new/message', (req, res) => {
-    const newMsg = req.body;
+// app.post('/new/message', (req, res) => {
+//     const newMsg = req.body;
 
-    mongoData.update(
-        { _id: req.query.id },
-        { $push: { conversation: req.body } },
-        (err, data) => {
-            if (err) {
-                console.log('Error: Saving msg aborting');
-                console.log(err);
+//     mongoData.update(
+//         { _id: req.query.id },
+//         { $push: { conversation: req.body } },
+//         (err, data) => {
+//             if (err) {
+//                 console.log('Error: Saving msg aborting');
+//                 console.log(err);
 
-                res.status(500).send(err);
-            } else {
-                res.status(201).send(data)
-            }
-        }
-    )
-});
+//                 res.status(500).send(err);
+//             } else {
+//                 res.status(201).send(data)
+//             }
+//         }
+//     )
+// });
 
-app.get('/get/data', (req, res) => {
-    mongoData.find((err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(200).send(data)
-        }
-    })
-});
+// app.get('/get/data', (req, res) => {
+//     mongoData.find((err, data) => {
+//         if (err) {
+//             res.status(500).send(err)
+//         } else {
+//             res.status(200).send(data)
+//         }
+//     })
+// });
 
-app.get('/get/conversation', (req, res) => {
-    const id = req.query.id
-    mongoData.find({ _id: id }, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(200).send(data)
-        }
-    })
-});
+// app.get('/get/conversation', (req, res) => {
+//     const id = req.query.id
+//     mongoData.find({ _id: id }, (err, data) => {
+//         if (err) {
+//             res.status(500).send(err)
+//         } else {
+//             res.status(200).send(data)
+//         }
+//     })
+// });
 
 // app.use('graphql', graphqlHTTP({
 //     graphiql: true,

@@ -1,5 +1,4 @@
 import firebase from 'firebase'
-import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDx88w-dmZbDukE7Kpgu1DofSf66CXdmk8",
