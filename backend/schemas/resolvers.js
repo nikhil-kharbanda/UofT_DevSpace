@@ -50,8 +50,9 @@ const resolvers = {
             return { token, user };
           },
           addChatroom:async(parent,{channelName})=>{
+            console.log(channelName)
             try{
-              let newChatRoom= await ChatRoom.create(channelName)
+              let newChatRoom= await ChatRoom.create({channelName:channelName})
 
               return newChatRoom
             }
@@ -59,20 +60,13 @@ const resolvers = {
               console.log(err)
             }
           },
-          newMessage: async(parent,{chatId,message})=>{
-            let newMsg = ChatRoom.update(
-              { _id: chatId },
-              { $push: { conversation: message } },
-              (err, data) => {
-                if (err) {
-                    console.log('Error: Saving msg aborting');
-                    console.log(err);
-    
-                    res.status(500).send(err);
-                } else {
-                    res.status(201).send(data)
-                }
-            }
+          newMessage: async(parent,{id, message})=>{
+            console.log("new message started")
+            let newMsg = ChatRoom.findByIdAndUpdate(
+              { _id: id },
+              { $push: { conversation: {message:message} } },
+              { new: true }
+
           )
             return newMsg
           }

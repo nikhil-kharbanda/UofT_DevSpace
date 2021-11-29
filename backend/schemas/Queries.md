@@ -57,16 +57,16 @@ query ($id:ID!){
 ADD CHANNEL
 ```graphql
 mutation($channelName:String!){
-  addChatroom(channelName:$chatName){
+  addChatroom(channelName:$channelName){
     channelName
   }
 }
 ```
 NEW MESSAGE
 ```graphql
-mutation(chatId:ID!, message:String!){
-  newMessage(chatId:$chatId, message:$message){
-    
+mutation($id:ID!, $message:String!){
+  newMessage(id:$id, message:$message){
+    _id
   }
 }
 ```
