@@ -1,4 +1,4 @@
-const { User, Chat, Message, ChatRoom, Conversation } = require('../models')
+const { User, ChatRoom } = require('../models')
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -23,7 +23,7 @@ const resolvers = {
       },
         conversation: async (parent, args) => {
           // Use the parameter to find the matching class in the collection
-          return await Conversation.findById(args.id);
+          return await ChatRoom.findById(args.id)
         },
     },
     Mutation: {
@@ -49,6 +49,33 @@ const resolvers = {
       
             return { token, user };
           },
+          addChatroom:async(parent,{channelName})=>{
+            try{
+              let newChatRoom= await ChatRoom.create(channelName)
+
+              return newChatRoom
+            }
+            catch(err){
+              console.log(err)
+            }
+          },
+          newMessage: async(parent,{chatId,message})=>{
+            let newMsg = ChatRoom.update(
+              { _id: chatId },
+              { $push: { conversation: message } },
+              (err, data) => {
+                if (err) {
+                    console.log('Error: Saving msg aborting');
+                    console.log(err);
+    
+                    res.status(500).send(err);
+                } else {
+                    res.status(201).send(data)
+                }
+            }
+          )
+            return newMsg
+          }
     }
 }
 

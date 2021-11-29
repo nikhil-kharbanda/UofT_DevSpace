@@ -34,3 +34,39 @@ query {
     }
 }
 ```
+GET CONVERSATION BY CHANNEL ID
+```graphql
+query ($id:ID!){
+ conversation(id: $id){
+  _id
+  channelName
+  conversation{
+    user{
+      displayName
+      email
+      photo
+      uid
+    }
+    message
+    timestamp
+    _id
+  }
+}
+}
+```
+ADD CHANNEL
+```graphql
+mutation($channelName:String!){
+  addChatroom(channelName:$chatName){
+    channelName
+  }
+}
+```
+NEW MESSAGE
+```graphql
+mutation(chatId:ID!, message:String!){
+  newMessage(chatId:$chatId, message:$message){
+    
+  }
+}
+```

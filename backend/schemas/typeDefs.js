@@ -12,28 +12,16 @@ const typeDefs = gql`
     }
 
     type Conversation {
-      _id: ID
       message: String
       timestamp: String
       user: User
+      _id:ID
     }
     
     type ChatRoom {
       _id: ID
       channelName: String
       conversation: [Conversation]
-    }
-
-    type Chat {
-      chatName: String
-      latestMessage: Message
-      groupAdmin: User
-    }
-
-    type Message {
-      sender: User!
-      content: String
-      chat: Chat
     }
 
     type Auth {
@@ -44,12 +32,14 @@ const typeDefs = gql`
     type Query {
     getUsers: [User]
     channels: [ChatRoom]
-    conversation(id:ID!): Conversation
+    conversation(id:ID!): ChatRoom
     }
 
     type Mutation {
       addUser(username: String!, email: String!, password: String!): Auth
       login(username: String!, password: String!): Auth
+      addChatroom(channelName:String!):ChatRoom
+      newMessage(chatId:ID!, message:String!):ChatRoom
     }
 `;
 
