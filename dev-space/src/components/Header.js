@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Button } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: 'white'
+  },
+  red: {
+    color: 'red'
+  },
+  btn: {
+    color: 'white',
+    fontWeight: 'bolder'
+  },
+  main: {
+    textAlign: 'center'
   }
 }));
 
@@ -35,14 +45,15 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar className={classes.appbar} elevation={0}>
           <Toolbar className={classes.appbarWrapper}>
-          <h1 className={classes.appbarTitle}>Home.</h1>
+          <h1 className={classes.appbarTitle}>Home<span className={classes.red}>.</span></h1>
           <IconButton>
               <SortIcon className={classes.icon}></SortIcon>
           </IconButton>
           </Toolbar>
       </AppBar>
-      <div>
-        <h1 className={classes.title}>Welcome to <br />Dev Space.</h1>
+      <div className={classes.main}>
+        <h1 className={classes.title}>Welcome to <br /><span className={classes.red}>Dev Space</span>.</h1>
+        <Button className={classes.btn}>Enter</Button>
       </div>
     </div>
   );
