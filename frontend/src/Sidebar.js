@@ -3,21 +3,13 @@ import './Sidebar.css'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import AddIcon from '@material-ui/icons/Add'
 import SidebarChannel from './SidebarChannel'
-import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import CallIcon from '@material-ui/icons/Call'
 import { Avatar } from '@material-ui/core'
-import MicIcon from '@material-ui/icons/Mic'
-import HeadsetIcon from '@material-ui/icons/Headset'
-import SettingsIcon from '@material-ui/icons/Settings'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../frontend/src/features/userSlice'
-import db, { auth } from './firebase'
+import { auth } from './firebase'
 import { useState } from 'react'
 import { useEffect } from 'react'
-
 import axios from './axios'
-
 import Pusher from 'pusher-js'
 
 const pusher = new Pusher('d0c7b930b87e03a39dd0', {

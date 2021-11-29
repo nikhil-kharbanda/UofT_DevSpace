@@ -2,20 +2,13 @@ import React from 'react'
 import './Chat.css'
 import ChatHeader from './ChatHeader'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-import CradGiftcardIcon from '@material-ui/icons/CardGiftcard'
-import GifIcon from '@material-ui/icons/Gif'
-import EmojiEmoticonsIcon from '@material-ui/icons/EmojiEmotions'
 import Message from './Message'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../frontend/src/features/userSlice'
 import { selectChannelId, selectChannelName } from '../../frontend/src/features/appSlice'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import db from './firebase'
-import firebase from 'firebase'
-
 import axios from './axios'
-
 import Pusher from 'pusher-js'
 
 const pusher = new Pusher('d0c7b930b87e03a39dd0', {
