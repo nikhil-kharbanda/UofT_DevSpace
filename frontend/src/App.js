@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,7 +8,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 
 import ChatPage from './Pages/ChatPage';
 import Homepage from './Pages/Homepage';
@@ -33,6 +33,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   return (
     <div className="App">
       <ApolloProvider client={client}>

@@ -1,24 +1,49 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { auth } from '../firebase';
+import { login, logout } from '../features/userSlice'
+import Chat from '../Chat';
+import Sidebar from '../Sidebar';
+import Login from '../Login';
+import { selectUser } from '../features/userSlice';
+import { useDispatch, useSelector } from 'react-redux'
 
 const ChatPage = () => {
-  const [chats, setChats] = useState([]);
-  const fetchChats = async () => {
-    const { data } = await axios.get("/api/chat");
-
-    setChats(data);
-  };
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   useEffect(() => {
-    fetchChats();
-  }, []);
+    auth.onAuthStateChanged((authUser) => {
+
+      console.log(authUser)
+
+      if (authUser) {
+        dispatch(login({
+          uid: authUser.uid,
+          photo: authUser.photoURL,
+          email: authUser.email,
+          displayName: authUser.displayName
+        }))
+      } else {
+        dispatch(logout())
+      }
+    })
+  }, [dispatch])
+
+  console.log(user)
+
 
   return (
-    <div>
-      <h1>chat page</h1>
-      {chats.map((chat) => (
-        <div key={chat._id}>{chat.chatName}</div>
-      ))}
+    <div className="app">
+      {user ? (
+        <>
+          <Sidebar />
+          <Chat />
+        </>
+
+      ) : (
+          <Login />
+        )}
     </div>
   );
 };

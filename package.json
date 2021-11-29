@@ -1,0 +1,27 @@
+{
+  "name": "uoft_chatbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "develop": "concurrently \"cd backend && npm run watch\" \"cd frontend && npm start\"",
+    "install": "cd backend && npm i && cd ../frontend && npm i",
+    "seed": "cd backend && npm run seed",
+    "build": "cd frontend && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhil-kharbanda/UofT_Chatbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/nikhil-kharbanda/UofT_Chatbox/issues"
+  },
+  "homepage": "https://github.com/nikhil-kharbanda/UofT_Chatbox#readme"
+}
