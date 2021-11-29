@@ -1,20 +1,11 @@
 const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
-    type User {
-    _id: ID
-    uid: ID
-    username: String!
-    email: String
-    password: String
-    displayName: String
-    photo: String
-    }
 
     type Conversation {
       message: String
       timestamp: String
-      user: User
+      user: String
       _id:ID
     }
     
@@ -24,20 +15,12 @@ const typeDefs = gql`
       conversation: [Conversation]
     }
 
-    type Auth {
-    token: ID!
-    user: User
-  }
-
     type Query {
-    getUsers: [User]
     channels: [ChatRoom]
     conversation(id:ID!): ChatRoom
     }
 
     type Mutation {
-      addUser(username: String!, email: String!, password: String!): Auth
-      login(username: String!, password: String!): Auth
       addChatroom(channelName:String!):ChatRoom
       newMessage(id:ID!, message:String!):ChatRoom
     }
