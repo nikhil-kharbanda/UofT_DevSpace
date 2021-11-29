@@ -1,5 +1,4 @@
 const ChatRoom = require('./mongoData');
-const User = require('./User');
 const Conversation = require('./conversation')
 
-module.exports = { ChatRoom, User, Conversation };
+module.exports = { ChatRoom, Conversation };
