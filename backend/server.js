@@ -8,11 +8,11 @@ const Pusher = require('pusher')
 // const {graphqlHTTP} = require('express-graphql');
 
 const pusher = new Pusher({
-  appId: "1306369",
-  key: "d0c7b930b87e03a39dd0",
-  secret: "ab0764f5f1fbc1f342d0",
-  cluster: "us2",
-  useTLS: true
+    appId: "1306369",
+    key: "d0c7b930b87e03a39dd0",
+    secret: "ab0764f5f1fbc1f342d0",
+    cluster: "us2",
+    useTLS: true
 });
 
 //app config
@@ -20,16 +20,22 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: (ctx) => ctx
+    typeDefs,
+    resolvers,
+    context: (ctx) => ctx
 });
 
 //middleware
 app.use(express.json());
 app.use(cors())
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(dirname, '../frontend/build')));
+}
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(dirname, '../frontend/build/index.html'));
+});
 
 server.applyMiddleware({ app });
 
@@ -122,7 +128,7 @@ db.once('open', () => {
     const changeStream = db.collection('messages').watch();
 
     changeStream.on('change', (change) => {
-        if(change.operationType === 'insert') {
+        if (change.operationType === 'insert') {
             pusher.trigger('channels', 'newChannel', {
                 'change': change
             })
@@ -136,8 +142,7 @@ db.once('open', () => {
     })
 
     app.listen(port, () => {
-      console.log(`API server running on port ${port}!`);
-      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+        console.log(`API server running on port ${port}!`);
+        console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
     });
-  });
-  
+});
