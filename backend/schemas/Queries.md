@@ -54,3 +54,19 @@ query ($id:ID!){
 }
 }
 ```
+ADD CHANNEL
+```graphql
+mutation($channelName:String!){
+  addChatroom(channelName:$chatName){
+    channelName
+  }
+}
+```
+NEW MESSAGE
+```graphql
+mutation(chatId:ID!, message:String!){
+  newMessage(chatId:$chatId, message:$message){
+    
+  }
+}
+```

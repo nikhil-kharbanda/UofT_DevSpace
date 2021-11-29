@@ -38,7 +38,8 @@ const typeDefs = gql`
     type Mutation {
       addUser(username: String!, email: String!, password: String!): Auth
       login(username: String!, password: String!): Auth
-      addChatroom(chatName:String!):ChatRoom
+      addChatroom(channelName:String!):ChatRoom
+      newMessage(chatId:ID!, message:String!):ChatRoom
     }
 `;
 
