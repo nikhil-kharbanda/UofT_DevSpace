@@ -39,7 +39,7 @@ const typeDefs = gql`
       addUser(username: String!, email: String!, password: String!): Auth
       login(username: String!, password: String!): Auth
       addChatroom(channelName:String!):ChatRoom
-      newMessage(chatId:ID!, message:String!):ChatRoom
+      newMessage(id:ID!, message:String!):ChatRoom
     }
 `;
 
