@@ -1,9 +1,7 @@
 const { ApolloServer } = require('apollo-server-express');
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas')
-
 const express = require('express')
-
 const cors = require('cors')
 const mongoData = require('./models/mongoData')
 const Pusher = require('pusher')
@@ -30,6 +28,8 @@ const server = new ApolloServer({
 //middleware
 app.use(express.json());
 app.use(cors())
+
+
 
 server.applyMiddleware({ app });
 
