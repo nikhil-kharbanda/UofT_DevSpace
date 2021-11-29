@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Button } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Button, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+  const [checked,setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(true);
+  },[]);
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbar} elevation={0}>
@@ -51,10 +55,13 @@ export default function Header() {
           </IconButton>
           </Toolbar>
       </AppBar>
+
+      <Collapse in={checked} {...(checked ? {timeout: 1000} : {})}>
       <div className={classes.main}>
         <h1 className={classes.title}>Welcome to <br /><span className={classes.red}>Dev Space</span>.</h1>
         <Button className={classes.btn}>Enter</Button>
       </div>
+      </Collapse>
     </div>
   );
 };
