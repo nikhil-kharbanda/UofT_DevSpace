@@ -34,3 +34,23 @@ query {
     }
 }
 ```
+GET CONVERSATION BY CHANNEL ID
+```graphql
+query ($id:ID!){
+ conversation(id: $id){
+  _id
+  channelName
+  conversation{
+    user{
+      displayName
+      email
+      photo
+      uid
+    }
+    message
+    timestamp
+    _id
+  }
+}
+}
+```

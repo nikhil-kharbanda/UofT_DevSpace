@@ -2,23 +2,19 @@ const mongoose = require('mongoose')
 
 const conversation = mongoose.Schema(
     {
-        chatName:{type: String, trim: true},
-        message:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Message"
-        }],
+        message:{
+            type: String
+        },
         timestamp: {
-            type:mongoose.Schema.Types.ObjectId,
-            ref: "Message",
+            type: String
         },
         user: {
-            type:mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            displayName: String,
+            email: String,
+            photo: String,
+            uid: String
         }
     },
-    {
-        timestamps: true
-    }
 );
 
 const Conversation = mongoose.model("Conversation", conversation);

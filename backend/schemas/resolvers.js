@@ -1,4 +1,4 @@
-const { User, Chat, Message, ChatRoom, Conversation } = require('../models')
+const { User, ChatRoom } = require('../models')
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -23,7 +23,7 @@ const resolvers = {
       },
         conversation: async (parent, args) => {
           // Use the parameter to find the matching class in the collection
-          return await Conversation.findById(args.id);
+          return await ChatRoom.findById(args.id)
         },
     },
     Mutation: {
