@@ -49,6 +49,20 @@ const resolvers = {
       
             return { token, user };
           },
+          addChatroom:async(parent,{chatName})=>{
+
+
+            try{
+              let newChatRoom= await mongoData.create(chatName)
+
+              return newChatRoom
+            }
+
+            catch(err){
+              console.log(err)
+            }
+            
+          }
     }
 }
 
