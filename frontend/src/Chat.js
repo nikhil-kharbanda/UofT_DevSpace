@@ -10,6 +10,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from './axios'
 import Pusher from 'pusher-js'
+import { useLazyQuery, useMutation } from '@apollo/client'
+import { CONVO_MSGS } from './utils/queries'
+import { ADD_MSG } from './utils/mutations'
 
 const pusher = new Pusher('d0c7b930b87e03a39dd0', {
     cluster: 'us2'
@@ -19,38 +22,63 @@ const Chat = () => {
     const user = useSelector(selectUser)
     const channelId = useSelector(selectChannelId)
     const channelName = useSelector(selectChannelName)
-    const [input, setInput] = useState('')
-    const [messages, setMessages] = useState([])
 
-    const getConvo = (channelId) => {
-        if (channelId) {
-            axios.get(`/get/conversation?id=${channelId}`)
-                .then((res) => {
-                    setMessages(res.data[0].conversation)
-                })
-        }
-    }
+    const [input, setInput] = useState('')
+
+    // const [messages, setMessages] = useState([])
+    const [loadConvos, { called, loading, data }] = useLazyQuery(CONVO_MSGS, {
+        variables: { id: channelId }
+    })
+
+    const [newMessage, { error }] = useMutation(ADD_MSG)
+
+    const messages = data?.conversation.conversation || []
 
     useEffect(() => {
-        getConvo(channelId)
+        loadConvos()
 
-        const channel = pusher.subscribe('conversation');
-        channel.bind('newMessage' , function(data) {
-            getConvo(channelId)
-        })
 
     }, [channelId])
 
-    const sendMessage = (e) => {
+    useEffect(() => {
+        if (!loading) {
+
+
+            const channel = pusher.subscribe('conversation');
+            channel.bind('newMessage', function (adata) {
+                console.log(adata, 'data')
+               loadConvos()
+            })
+        }
+    }, [called])
+
+
+
+
+
+    const sendMessage =async  (e) => {
         e.preventDefault()
+        const messageData={
+            message:input,
+            timestamp:Date.now().toString(),
+            user:user
+            
+        }
+      
+        console.log({id:channelId,messageData:messageData})
+try{
+    const {data}=await newMessage({
+        variables:{id:channelId,messageData:messageData}
+    })
+    console.log(data)
+    setInput('')
+}catch(err){
+    console.log(err,'catch error')
+    console.log(error,'mutation error')
+}
+      
 
-        axios.post(`/new/message?id=${channelId}`, {
-            message: input,
-            timestamp: Date.now(),
-            user: user,
-        })
-
-        setInput('')
+        
     }
 
     return (

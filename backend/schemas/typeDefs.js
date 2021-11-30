@@ -5,8 +5,15 @@ const typeDefs = gql`
     type Conversation {
       message: String
       timestamp: String
-      user: String
+      user: User
       _id:ID
+    }
+
+    type User{
+      displayName: String
+      email: String
+      photo: String
+      uid: String
     }
     
     type ChatRoom {
@@ -15,14 +22,28 @@ const typeDefs = gql`
       conversation: [Conversation]
     }
 
+
+    input ConversationInput{
+      message: String
+      timestamp: String
+      user:UserInput
+    }
+
+    input UserInput{
+      displayName: String
+      email: String
+      photo: String
+      uid: String
+    }
+
     type Query {
     channels: [ChatRoom]
-    conversation(id:ID!): ChatRoom
+    conversation(_id:ID!): ChatRoom
     }
 
     type Mutation {
       addChatroom(channelName:String!):ChatRoom
-      newMessage(id:ID!, message:String!):ChatRoom
+      newMessage(id:ID!, messageData:ConversationInput!):ChatRoom
     }
 `;
 
