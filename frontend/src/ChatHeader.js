@@ -1,6 +1,5 @@
 import React from 'react'
 import './ChatHeader.css'
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded'
 
 const ChatHeader = ({ channelName }) => {
     return (
@@ -12,10 +11,6 @@ const ChatHeader = ({ channelName }) => {
             </div>
 
             <div className="chatHeader__right">
-                <div className="chatHeader__search">
-                    <input type="text" placeholder='Search' />
-                    <SearchRoundedIcon />
-                </div>
             </div>
         </div>
     )
