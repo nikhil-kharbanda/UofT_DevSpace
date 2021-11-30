@@ -26,8 +26,7 @@ function App() {
     <div className="App">
       <ApolloProvider client={client}>
         <Router>
-          <Route exact path='/' component={Homepage}/>
-          <Route exact path='/chats' component={ChatPage}/>
+          <Route exact path='/' component={ChatPage}/>
         </Router>
       </ApolloProvider>
     </div>
