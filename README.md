@@ -35,5 +35,9 @@
   For a live demo: https://devspace-jnmst.herokuapp.com/
   
   ## Images
-  ![image](https://user-images.githubusercontent.com/87992263/143961073-00869fa5-d2dd-4031-b78b-64c6519d8d4f.png)
+![image](https://user-images.githubusercontent.com/87992263/144091429-d74d1f56-2d87-4d9a-b7b1-f8956e9de544.png)
+![image](https://user-images.githubusercontent.com/87992263/144091567-8ff96c86-20a6-49af-8e80-072ed986cf96.png)
+![image](https://user-images.githubusercontent.com/87992263/144091632-b77c4f89-1f20-4e38-bfc6-cef2d4e6f4d1.png)
+
+
 
