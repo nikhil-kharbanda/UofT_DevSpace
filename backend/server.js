@@ -5,6 +5,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoData = require('./models/mongoData')
 const Pusher = require('pusher')
+const path = require('path')
 // const {graphqlHTTP} = require('express-graphql');
 
 const pusher = new Pusher({
@@ -30,18 +31,16 @@ app.use(express.json());
 app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(dirname, '../frontend/build')));
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
 }
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(dirname, '../frontend/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+// });
 
 server.applyMiddleware({ app });
 
-
 //api routes
-app.get('/', (req, res) => res.status(200).send('hello'))
 
 app.post('/new/channel', (req, res) => {
     const dbData = req.body;
