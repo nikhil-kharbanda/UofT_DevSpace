@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@500&family=Work+Sans:wght@300&display=swap');
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -17,8 +18,23 @@
 }
 
 .sidebar__title {
+    color: rgb(248, 147, 15);
+    font-size: 40px;
+    font-weight: 900;
+    font-style: italic;
+    font-family: "Fjalla One";
+}
+
+.sidebar__title::before {
+    content: '</';
     color: black;
 }
+
+.sidebar__title::after {
+    content: '>';
+    color: black;
+}
+
 
 .sidebar__channels {
     flex: 1;
