@@ -34,6 +34,6 @@
   ## Links
   For a live demo: https://devspace-jnmst.herokuapp.com/
   
-  ##Images
+  ## Images
   ![image](https://user-images.githubusercontent.com/87992263/143961073-00869fa5-d2dd-4031-b78b-64c6519d8d4f.png)
 
