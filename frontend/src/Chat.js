@@ -8,8 +8,8 @@ import { selectUser } from '../../frontend/src/features/userSlice'
 import { selectChannelId, selectChannelName } from '../../frontend/src/features/appSlice'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import axios from './axios'
 import Pusher from 'pusher-js'
+// import axios from './axios'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { CONVO_MSGS } from './utils/queries'
 import { ADD_MSG } from './utils/mutations'
@@ -42,43 +42,35 @@ const Chat = () => {
 
     useEffect(() => {
         if (!loading) {
-
-
             const channel = pusher.subscribe('conversation');
             channel.bind('newMessage', function (adata) {
-                console.log(adata, 'data')
-               loadConvos()
+                // console.log(adata, 'data')
+                loadConvos()
             })
         }
     }, [called])
 
-
-
-
-
-    const sendMessage =async  (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault()
-        const messageData={
-            message:input,
-            timestamp:Date.now().toString(),
-            user:user
-            
-        }
-      
-        console.log({id:channelId,messageData:messageData})
-try{
-    const {data}=await newMessage({
-        variables:{id:channelId,messageData:messageData}
-    })
-    console.log(data)
-    setInput('')
-}catch(err){
-    console.log(err,'catch error')
-    console.log(error,'mutation error')
-}
-      
+        const messageData = {
+            message: input,
+            timestamp: Date.now().toString(),
+            user: user
 
-        
+        }
+        try {
+            const { data } = await newMessage({
+                variables: { id: channelId, messageData: messageData }
+            })
+            // console.log(data)
+            setInput('')
+        } catch (err) {
+            console.log(err, 'catch error')
+            console.log(error, 'mutation error')
+        }
+
+
+
     }
 
     return (
@@ -87,7 +79,7 @@ try{
 
             <div className="chat__messages">
                 {messages.map((message) => {
-                    console.log(message)
+                    // console.log(message)
                 })}
                 {messages.map(message => (
                     <Message message={message.message} timestamp={message.timestamp} user={message.user} />

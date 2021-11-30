@@ -9,7 +9,6 @@ import {
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ChatPage from './Pages/ChatPage';
-import Homepage from './Pages/Homepage';
 
 const httpLink = createHttpLink({
   uri: '/graphql',

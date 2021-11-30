@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { auth } from '../firebase';
 import { login, logout } from '../features/userSlice'
 import Chat from '../Chat';
@@ -15,7 +14,7 @@ const ChatPage = () => {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
 
-      console.log(authUser)
+      // console.log(authUser)
 
       if (authUser) {
         dispatch(login({
@@ -30,7 +29,7 @@ const ChatPage = () => {
     })
   }, [dispatch])
 
-  console.log(user)
+  // console.log(user)
 
 
   return (
