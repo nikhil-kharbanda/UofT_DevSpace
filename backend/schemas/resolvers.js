@@ -12,7 +12,8 @@ const resolvers = {
     },
     conversation: async (parent, args) => {
       // Use the parameter to find the matching class in the collection
-      return await ChatRoom.findById(args.id)
+      console.log(args)
+      return await ChatRoom.findById(args._id)
     },
   },
   Mutation: {
@@ -27,14 +28,19 @@ const resolvers = {
         console.log(err)
       }
     },
-    newMessage: async (parent, { id, message }) => {
-      console.log("new message started")
+    newMessage: async (parent, { id, messageData }) => {
+      console.log(id,'newMessage')
+      console.log(messageData)
+     
+
+     
       let newMsg = ChatRoom.findByIdAndUpdate(
         { _id: id },
-        { $push: { conversation: { message: message } } },
+        { $push: { conversation: messageData } },
         { new: true }
 
       )
+      // console.log(newMsg)
       return newMsg
     }
   }
