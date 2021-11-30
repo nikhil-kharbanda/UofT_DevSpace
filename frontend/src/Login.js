@@ -1,23 +1,21 @@
-import { Button } from '@material-ui/core'
-import React from 'react'
-import './Login.css'
-import { auth, provider } from './firebase'
+import { Button } from "@material-ui/core";
+import React from "react";
+import "./Login.css";
+import { auth, provider } from "./firebase";
 
 const Login = () => {
-    const signIn = () => {
-        // clever google login shizz...
+  const signIn = () => {
+    auth.signInWithPopup(provider).catch((err) => alert(err.message));
+  };
+  return (
+    <div className="login">
+      <h1 className="login__title">Welcome To Dev Space</h1>
+      <h2 className="login_slogan">
+        Chat Learn Develop
+      </h2>
+      <Button onClick={signIn}>Sign In</Button>
+    </div>
+  );
+};
 
-        auth.signInWithPopup(provider).catch((err) => alert(err.message))
-    }
-    return (
-        <div className='login' >
-            <div className="login__logo">
-                <img src="https://www.freepnglogos.com/uploads/discord-logo-png/discord-logo-logodownload-download-logotipos-1.png" alt="discord logo" />
-            </div>
-
-            <Button onClick={signIn}>Sign In</Button>
-        </div>
-    )
-}
-
-export default Login
+export default Login;
