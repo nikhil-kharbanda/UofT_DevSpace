@@ -17,7 +17,19 @@
   * [Links and Images](#links)
 
   ## Installation
-  No installation needed
+ 
+  ### Clone Repo
+  
+  git clone https://github.com/nikhil-kharbanda/UofT_DevSpace.git
+  
+  ### Install locally
+  
+  All NPM packages required for this application (Express, Compression, Mongoose, Lite-Server and Morgan) are already listed as dependencies in the package.json file. Run the command 'npm i' command in your terminal at the root directory level to install the packages.
+Ensure you have Node.js installed on your machine. The application will be invoked by entering node server.js in the command line.
+
+  ### Start Application 
+  
+  You will see App running on port 3000! in the console. You can then view the app on http://localhost:3000/.
 
   ## Usage
   Please visit the deployed link below
